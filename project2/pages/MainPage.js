@@ -40,7 +40,7 @@ const MainPage = () => {
             }
         })}
         >
-            <Tab.Screen name='Post' component={Home} options={{headerShown : false}}/>
+          <Tab.Screen name='Post' component={Home} options={{ headerShown: false }} listeners={{ tabPress: (e) => { e.preventDefault(); navigation.navigate('Post') } }} />
             <Tab.Screen name='Add' component={Post} options={{ headerShown: false }} listeners={{tabPress : (e)=>{e.preventDefault();navigation.navigate('Add',{id : id})}}}/>
             <Tab.Screen name='Profile' component={Profile} options={{ headerShown: false}} listeners={{tabPress:(e)=>{e.preventDefault();navigation.navigate('Profile',{username : username , email : email})}}} />
         </Tab.Navigator>

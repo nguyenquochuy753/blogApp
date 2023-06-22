@@ -1,4 +1,4 @@
-import { View, Text , StyleSheet , TextInput , TouchableOpacity , Image} from 'react-native'
+import { View, Text , StyleSheet , TextInput , TouchableOpacity } from 'react-native'
 import React , {useState} from 'react'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import * as ImagePicker from 'expo-image-picker';
@@ -14,6 +14,7 @@ const Post = () => {
   const [des , setDes] = useState('')
   const route = useRoute()
   const {id} = route.params
+  console.log(id)
   
   const imagePicker = async() =>{
     // let result = await ImagePicker.launchImageLibraryAsync({

@@ -5,10 +5,10 @@ import {useNavigation , useRoute} from '@react-navigation/native'
 const DetailPost = () => {
     const navigation = useNavigation()
     const route = useRoute()
-    const {title , des , imgURLs , owner} = route.params
+    const {title , des , imgURLs , owner } = route.params
   return (
     <View style={{height : '100%' , backgroundColor : '#fff'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
             <Image source={require('../assets/back.png')}
                 style={{ height: 36, width: 36, resizeMode: 'contain', marginLeft: 20, marginTop: 40 }} />
         </TouchableOpacity>

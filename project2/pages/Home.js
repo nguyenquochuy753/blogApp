@@ -3,11 +3,19 @@ import React , {useEffect , useState} from 'react'
 import CardPost from '../components/CardPost'
 import Axios from 'axios'
 import Loading from '../components/Loading';
+import { useRoute , useNavigation } from "@react-navigation/native"
 
 
 const Home = () => {
+  const navigation = useNavigation()
   const [postList , setPostList] = useState([])
   const [loading , setLoading] = useState(false)
+  const route = useRoute()
+  let id = "648442affbff0fcee42278d8"
+  
+  
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,7 +28,6 @@ const Home = () => {
         console.log(error);
       }
     };
-
     fetchData();
   }, []);
   
@@ -33,7 +40,16 @@ const Home = () => {
         {
           postList.map((post,key)=>{
             return (
-              <CardPost key={key} title={post.title} des={post.des} like={post.like} owner={post.owner} img={post.imgURLs}/>
+              <CardPost 
+              key={key} 
+              id={post._id} 
+              title={post.title} 
+              des={post.des} 
+              like={post.like} 
+              owner={post.owner} 
+              img={post.imgURLs} 
+              idLogin = {id} 
+              />
             )
           })
         }

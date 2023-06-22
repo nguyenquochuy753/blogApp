@@ -1,13 +1,18 @@
 import { View, Text , Image , TouchableOpacity } from 'react-native'
-import react from 'react'
+import react, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import axios from "axios"
 
 const CardPost = (props) => {
   const navigation = useNavigation()
   const imgURL = 'http://172.17.16.114:8000/'+props.img //Đổi địa chỉ ip phải sửa lại
   console.log(imgURL)
+  const id = props.id
+  const idLogin = props.idLogin
   const MAX_TITLE_LENGTH = 30;
   const MAX_DESCRIPTION_LENGTH = 100;
+
+  const [likes, setLikes] = useState(props.like)
 
   const truncatedTitle = props.title.length > MAX_TITLE_LENGTH
     ? props.title.slice(0, MAX_TITLE_LENGTH) + '...'
@@ -16,6 +21,19 @@ const CardPost = (props) => {
   const truncatedDescription = props.des.length > MAX_DESCRIPTION_LENGTH
     ? props.des.slice(0, MAX_DESCRIPTION_LENGTH) + '...'
     : props.des;
+
+  const likeHandle = ()=>{
+    axios.put('http://172.17.16.114:8000/v1/post/likePost',{
+      _id : id
+    }).then(()=>{console.log('Like thành công'); setLikes(likes + 1)})
+    .catch((err)=>console.log(err + id))
+  }
+
+  const deletePost = () => {
+
+    axios.delete('http://172.17.16.114:8000/v1/post/deletePost', {postID : id}).then(()=>console.log('Xóa thành công')).catch(err=>console.log(err))
+  }
+
   return (
     <View 
           style={{
@@ -38,10 +56,10 @@ const CardPost = (props) => {
         <Text style={{ fontSize: 18 , color : 'gray'}}>{truncatedDescription}</Text>
         <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', marginTop: 15 , justifyContent : 'space-between'}}> 
           <View style={{ flexDirection: 'row', alignItems: 'center', width: 70, justifyContent: 'space-between' }}>
-            <TouchableOpacity>
-              <Image source={require('../assets/thumb-up.png')} style={{ height: 35, width: 36, resizeMode: 'cover' }} />
+            <TouchableOpacity onPress={likeHandle}>
+              <Image source={require('../assets/thumb-up.png')} style={{ height: 35, width: 36, resizeMode: 'cover' }}/>
             </TouchableOpacity>
-            <Text style={{ fontSize: 24, color: '#164DB1' }}>{props.like}</Text>
+            <Text style={{ fontSize: 24, color: '#164DB1' }}>{likes}</Text>
           </View>
           <TouchableOpacity 
           style={{ height: 35, width: 80, backgroundColor: '#164DB1' , borderRadius :10 , justifyContent : 'center' , alignItems : 'center'}}
