@@ -6,12 +6,13 @@ import Loading from '../components/Loading';
 import { useRoute , useNavigation } from "@react-navigation/native"
 
 
-const Home = () => {
-  const navigation = useNavigation()
+const Home = ({route}) => {
+  // const navigation = useNavigation()
   const [postList , setPostList] = useState([])
   const [loading , setLoading] = useState(false)
-  const route = useRoute()
-  let id = "648442affbff0fcee42278d8"
+  // const route = useRoute()
+  const { id } = route.params
+  // let id = "648442affbff0fcee42278d8"
   
   
 

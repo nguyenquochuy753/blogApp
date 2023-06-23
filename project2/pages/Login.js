@@ -15,8 +15,8 @@ const Login = ({navigation}) => {
           password: pass
         })
         .then((res) => {
-          console.log(res.data)
-          navigation.navigate('Home', { username: res.data.userName, email: res.data.email, id: res.data._id })
+          // setUsername(res.data.userName)
+          navigation.navigate('Home', { username: username, email: res.data.email, id: res.data._id });
         })
         .catch((err) => {
           console.log(err)
