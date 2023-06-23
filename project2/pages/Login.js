@@ -15,9 +15,11 @@ const Login = ({navigation}) => {
           password: pass
         })
         .then((res) => {
+          console.log(res.data)
           navigation.navigate('Home', { username: res.data.userName, email: res.data.email, id: res.data._id })
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err)
           Toast.show({
             type: "error",
             text1: "Error",

@@ -72,11 +72,11 @@ const Post = () => {
       </View>
       <View style={styles.input}>
         <Icon name='text-fields' size={20} color="#666" style={{ marginRight: 5, marginTop: 3 }} />
-        <TextInput placeholder='Title' style={{ color: '#ccc' }} value={title} onChangeText={(val)=>setTitle(val)}/>
+        <TextInput placeholder='Title' style={{ color: '#ccc' , lineHeight: 20, height: 30}} value={title} onChangeText={(val)=>setTitle(val)} multiline/>
       </View>
       <View style={styles.input}>
         <Icon name='description' size={20} color="#666" style={{ marginRight: 5, marginTop: 3 }} />
-        <TextInput placeholder='Description' style={{ color: '#ccc' }} value={des} onChangeText={(val) => setDes(val)} />
+        <TextInput placeholder='Description' style={{ color: '#ccc' , lineHeight: 20, textAlignVertical:'top', overflow:'scroll', height: 200}} value={des} onChangeText={(val) => setDes(val)} multiline />
       </View>
       <View style={{marginTop : 25 , alignItems : 'center'}}>
         {/* {image && <Image source={{ uri: image }} style={{ width: 150, height: 150 , resizeMode : 'contain' }} />} */}
