@@ -11,7 +11,7 @@ const Home = ({route}) => {
   const [postList , setPostList] = useState([])
   const [loading , setLoading] = useState(false)
   // const route = useRoute()
-  const { id } = route.params
+  const { id, username , email } = route.params
   // let id = "648442affbff0fcee42278d8"
   
   
@@ -35,7 +35,7 @@ const Home = ({route}) => {
   return (
     <View style={{ height: '100%', backgroundColor: '#fff' , paddingTop :45 }}>
       <View>
-        <Text style={{ color: '#164DB1' , fontSize : 28 , fontWeight : 'bold' , marginLeft : 20 }}>Hi , Huy</Text>
+        <Text style={{ color: '#164DB1' , fontSize : 28 , fontWeight : 'bold' , marginLeft : 20 }}>Hi, {username}</Text>
       </View>
       {loading?(<ScrollView showsVerticalScrollIndicator={false}>
         {
@@ -50,6 +50,8 @@ const Home = ({route}) => {
               owner={post.owner} 
               img={post.imgURLs} 
               idLogin = {id} 
+              username = {username}
+              email = {email}
               />
             )
           })

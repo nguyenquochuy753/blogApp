@@ -7,8 +7,6 @@ const CardPost = (props) => {
   const navigation = useNavigation()
   const imgURL = 'http://172.17.16.114:8000/'+props.img //Đổi địa chỉ ip phải sửa lại
   console.log(imgURL)
-  const id = props.id
-  const idLogin = props.idLogin
   const MAX_TITLE_LENGTH = 30;
   const MAX_DESCRIPTION_LENGTH = 100;
 
@@ -24,14 +22,15 @@ const CardPost = (props) => {
 
   const likeHandle = ()=>{
     axios.put('http://172.17.16.114:8000/v1/post/likePost',{
-      _id : id
+      _id : props.id
     }).then(()=>{console.log('Like thành công'); setLikes(likes + 1)})
-    .catch((err)=>console.log(err + id))
+    .catch((err)=>console.log(err))
   }
 
   const deletePost = () => {
-
-    axios.delete('http://172.17.16.114:8000/v1/post/deletePost', {postID : id}).then(()=>console.log('Xóa thành công')).catch(err=>console.log(err))
+      axios.delete('http://172.17.16.114:8000/v1/post/deletePost', {postID : props.id})
+      .then(()=>console.log('Xóa thành công ' + props.id))
+      .catch(err=>console.log(err))
   }
 
   return (
@@ -63,10 +62,16 @@ const CardPost = (props) => {
           </View>
           <TouchableOpacity 
           style={{ height: 35, width: 80, backgroundColor: '#164DB1' , borderRadius :10 , justifyContent : 'center' , alignItems : 'center'}}
-            onPress={() => navigation.navigate('Detail',{title : props.title , des : props.des , imgURLs : imgURL , owner : props.owner})}
+            onPress={() => navigation.navigate('Detail',{postID : props.id , title : props.title , des : props.des , imgURLs : imgURL , owner : props.owner , id : props.idLogin , username : props.username , email : props.email})}
             >
             <Text style={{color : '#fff' , fontSize : 16 , fontWeight : 'bold'}}>Detail</Text>
           </TouchableOpacity>
+          {props.owner._id === props.idLogin ? (<TouchableOpacity
+            style={{ height: 35, width: 80, backgroundColor: '#E23F32', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}
+            onPress={deletePost}
+          >
+            <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>Delete</Text>
+          </TouchableOpacity>) : ""}
         </View>
       </View>
     </View>

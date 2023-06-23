@@ -7,14 +7,13 @@ import axios from 'axios';
 import * as DocumentPicker from 'expo-document-picker';
 import Toast from "react-native-toast-message"
 
-const Post = () => {
+const Post = ({route}) => {
   const [image, setImage] = useState('');
   const [fileimage, setFileImage] = useState('');
   const [title , setTitle] = useState('')
   const [des , setDes] = useState('')
-  const route = useRoute()
+  // const route = useRoute()
   const {id} = route.params
-  console.log(id)
   
   const imagePicker = async() =>{
     // let result = await ImagePicker.launchImageLibraryAsync({
