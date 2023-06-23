@@ -28,8 +28,8 @@ const CardPost = (props) => {
   }
 
   const deletePost = () => {
-      axios.delete('http://172.17.16.114:8000/v1/post/deletePost', {postID : props.id})
-      .then(()=>console.log('Xóa thành công ' + props.id))
+    axios.delete('http://172.17.16.114:8000/v1/post/deletePost', { data: {postID: props.id}})
+      .then(()=>{console.log('Xóa thành công ' + props.id)})
       .catch(err=>console.log(err))
   }
 
